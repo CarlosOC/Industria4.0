@@ -16,7 +16,7 @@ A continuación se detallan las configuraciones y los datos del tanque utilizado
 
 Se utiliza el protocolo Modbus TCP para la comunicación entre Factory I/O y el servidor. La configuración de la conexión es la siguiente:
 
-- **Dirección IP del servidor**: `192.168.1.12`
+- **Dirección IP del servidor**: `192.168.1.5`
 - **Puerto**: El puerto por defecto de Modbus TCP (502)
 
 ### Datos del Tanque
