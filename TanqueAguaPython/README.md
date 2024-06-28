@@ -1,6 +1,8 @@
 # Conexión Modbus con Factory I/O
 
-Este proyecto utiliza el software Factory I/O para realizar una conexión Modbus a un servidor. A continuación se detallan las configuraciones y los datos del tanque utilizados en la simulación.
+Este proyecto utiliza el software Factory I/O para realizar una conexión Modbus y controlar las válvulas de entrada y salida de agua, además de graficar los datos de nivel de agua obtenidos en la simulación.
+A continuación se detallan las configuraciones y los datos del tanque utilizados en la simulación.
+
 
 ## Configuración del Proyecto
 
