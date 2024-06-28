@@ -51,4 +51,10 @@ Este script define las clases `Tanque`, `TanqueConValvulas`, y `Valvula` que se 
 - **Clase `TanqueConValvulas`**: Hereda de la clase `Tanque` y añade la funcionalidad de manejo de válvulas para controlar el flujo de entrada y salida de líquidos.
 - **Clase `Valvula`**: Define una válvula con métodos para abrir y cerrar, así como para actualizar su estado a través de la comunicación Modbus.
 
+## Capturas de pantalla
+
+| Tanque Vacio | Tanque Llenandose | Tanque Lleno | Tanque Vaciandose |
+|--------------|-------------------|--------------|-------------------|
+| ![Tanque Vacio](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/Inicio.png) | ![Tanque Llenandose](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/TanqueLlenandose.png) | ![Tanque Lleno](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/TanqueLleno.png) | ![Tanque Vaciandose](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/TanqueVaciandose.png) |
+
 ---
