@@ -55,8 +55,8 @@ Este script define las clases `Tanque`, `TanqueConValvulas`, y `Valvula` que se 
 
 ## Capturas de pantalla
 
-| Tanque Vacio | Tanque Llenandose | Tanque Lleno | Tanque Vaciandose |
-|--------------|-------------------|--------------|-------------------|
+| Tanque Vacio | Tanque Llenandose | Tanque Lleno | Tanque Vaciandose | Configuracion Factory I/O |
+|--------------|-------------------|--------------|-------------------|-------------------|
 | ![Tanque Vacio](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/Inicio.png) | ![Tanque Llenandose](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/TanqueLlenandose.png) | ![Tanque Lleno](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/TanqueLleno.png) | ![Tanque Vaciandose](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/TanqueVaciandose.png) |![Configuracion Factory I/O](https://github.com/CarlosOC/Industria4.0/blob/main/TanqueAguaPython/ScreenShot/TanqueFactory.png) |
 
 ---
