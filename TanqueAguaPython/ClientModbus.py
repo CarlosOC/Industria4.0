@@ -1,16 +1,19 @@
 from pymodbus.client import ModbusTcpClient
 import time
 import matplotlib.pyplot as plt
- 
- 
-client = ModbusTcpClient('192.168.1.5') #Direccion del PC
+
+# Crear cliente Modbus TCP con la dirección IP del servidor
+client = ModbusTcpClient('192.168.1.12')  # Dirección del PC
 client.connect()
 
-cant_reg = 1
-esclavo = 1
+# Configuraciones iniciales
+cant_reg = 1  # Cantidad de registros a leer
+esclavo = 1   # Dirección del esclavo Modbus
 
+# Lista para almacenar los niveles del tanque
 NivelTQ=[]
 
+# Definir las posiciones de los inputs discretos (botones)
 # Inputs:  read_discrete_inputs(StartBoton, 1, esclavo)         print(input.bits[0])
 # Input 0: Start Boton
 # Input 1: Reset Boton
@@ -19,6 +22,7 @@ StartBoton = 0
 ResetBoton = 1
 StopBoton  = 2
 
+# Definir las posiciones de los registros de entrada
 # Inputs Register: read_input_registers(Level, 1, esclavo)       print(lectura.registers[0])
 # REG 0: Level Meter
 # REG 1: Flow Meter
@@ -27,6 +31,7 @@ Level       = 0
 Flow        = 1
 Setpoint    = 2
 
+# Definir las posiciones de las bobinas (coils)
 # COILS: write_coil(StartLight, False, esclavo)   # Luz en Boton
 # COIL 0: Start Light
 # COIL 1: Reset Light
@@ -35,6 +40,7 @@ StartLight = 0
 ResetLight = 1
 StopLight = 2
 
+# Definir las posiciones de los registros de retención (holding registers)
 # Holding Register write_register
 # REG 0: Fill Valve  
 # REG 1: Discharge Valve
@@ -44,19 +50,22 @@ FillValve = 0
 DischargeValve = 1  
 SP = 2  
 PV = 3  
- 
-# Inicializacion en Cero Todo
+
+# Inicialización de todos los elementos a cero
 client.write_coil(StartLight, False, esclavo)   # Luz en Boton
 client.write_coil(StopLight, False, esclavo)    # Luz en Boton
 client.write_coil(ResetLight, False, esclavo)   # Luz en Boton
- 
-client.write_register(SP, 0, esclavo)           # Pantallita SP
-client.write_register(PV, 0, esclavo)           # Pantallita PV
+
+client.write_register(SP, 0, esclavo)           # Pantalla SP
+client.write_register(PV, 0, esclavo)           # Pantalla PV
 client.write_register(FillValve, 0, esclavo)
 client.write_register(DischargeValve, 0, esclavo)
+
+# Crear figura para la gráfica
 fig, ax = plt.subplots()
 
-def update_data( NivelActual): 
+# Función para actualizar los datos del nivel del tanque en la gráfica
+def update_data(NivelActual):
     NivelTQ.append(NivelActual)
     ax.clear()
     ax.set_ylim(0, 1500)
@@ -66,22 +75,32 @@ def update_data( NivelActual):
     ax.plot(NivelTQ)   
 
 try:
+    # Encender la luz del botón de inicio y establecer el setpoint a 50
     client.write_coil(StartLight, True, esclavo)  # Luz en Boton 
-    client.write_register(SP, 50, esclavo)        # Pantallita SP
-    # client.write_register(PV, 50, esclavo)        # Pantallita PV
+    client.write_register(SP, 50, esclavo)        # Pantalla SP
+    # client.write_register(PV, 50, esclavo)        # Pantalla PV
     client.write_register(FillValve, 0, esclavo)
-    client.write_register(DischargeValve, 0, esclavo) 
+    client.write_register(DischargeValve, 0, esclavo)
+    
+    # Bucle principal
     while True:
-        lectura = client.read_input_registers(Level, 1, esclavo)  
-        print(lectura.registers[0]) 
-        update_data( lectura.registers[0])     
-        client.write_register(PV, lectura.registers[0], esclavo)           # Pantallita PV
+        # Leer el nivel del tanque
+        lectura = client.read_input_registers(Level, 1, esclavo)
+        print(lectura.registers[0])
+        
+        # Actualizar los datos y la gráfica
+        update_data(lectura.registers[0])
+        client.write_register(PV, lectura.registers[0], esclavo)  # Pantalla PV
+        
+        # Controlar las válvulas de llenado y descarga
         if lectura.registers[0] == 0:
             client.write_register(FillValve, 1000, esclavo)
-            client.write_register(DischargeValve, 0, esclavo) 
+            client.write_register(DischargeValve, 0, esclavo)
         elif lectura.registers[0] == 1000:
-            client.write_register(FillValve, 0, esclavo) 
+            client.write_register(FillValve, 0, esclavo)
             client.write_register(DischargeValve, 1000, esclavo)
-        plt.pause(0.25)  # Actualizar cada segundo
+        
+        plt.pause(0.25)  # Actualizar cada 0.25 segundos
 except KeyboardInterrupt:
+    # Cerrar la conexión al cliente Modbus cuando se interrumpe el programa
     client.close()
