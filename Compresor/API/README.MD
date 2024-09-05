@@ -17,8 +17,11 @@ Para ejecutar este proyecto necesitas tener instalado:
 
 ## Estructura de la API
 
-├── routes/
-│   └── app.route.compresorAtlas.js  # Definición de rutas para la API del compresor
-├── server.js                        # Archivo principal del servidor
-├── package.json                     # Dependencias y configuración del proyecto
-└── README.md                        # Documentación del proyecto
+# Definición de rutas para la API del compresor
+routes/app.route.compresorAtlas.js  
+# Archivo principal del servidor 
+server.js    
+# Dependencias y configuración del proyecto
+package.json                     
+ # Documentación del proyecto
+README.md                       
