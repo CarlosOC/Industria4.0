@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 
 async function webScraping() {
   let Data;
+  let URLCompresor ='http://192.168.100.100/'
   // Inicializar Puppeteer
   const browser = await puppeteer.launch({
     headless: 'new',
@@ -11,7 +12,7 @@ async function webScraping() {
 
   try {
     // Navegar a la página web
-    await page.goto('http://192.168.100.100/');
+    await page.goto(URLCompresor);
 
     // Esperar a que aparezcan los elementos deseados
     await page.waitForSelector('tr.row, tr.row1');
