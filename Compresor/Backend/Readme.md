@@ -32,8 +32,11 @@ Este proyecto usa las siguientes bibliotecas:
 - Node.js (v12 o superior)
 - NPM (v6 o superior)
 
-### Pasos
+- ## Contacto
 
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/web-scraping-compresores.git
+Si tienes alguna pregunta o sugerencia, no dudes en ponerte en contacto conmigo:
+
+- Correo electrónico: carlosoviedolr@gmail.com
+- Linkedin: [https://www.linkedin.com/in/carlosnicolasoviedocodigoni/] 
+
+Happy coding! 🚀
