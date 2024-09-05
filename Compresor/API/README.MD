@@ -16,6 +16,7 @@ Para ejecutar este proyecto necesitas tener instalado:
 - [npm](https://www.npmjs.com/) (v6 o superior)
 
 ## Estructura de la API
+
 ├── routes/
 │   └── app.route.compresorAtlas.js  # Definición de rutas para la API del compresor
 ├── server.js                        # Archivo principal del servidor
