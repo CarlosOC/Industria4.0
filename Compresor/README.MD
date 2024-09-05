@@ -30,10 +30,6 @@ El proyecto está dividido en las siguientes carpetas:
 
 Las contribuciones son bienvenidas. Por favor, realiza un fork del repositorio y abre un pull request con tus cambios.
 
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
 ## Contacto
 
 Si tienes alguna pregunta o sugerencia, no dudes en ponerte en contacto conmigo:
