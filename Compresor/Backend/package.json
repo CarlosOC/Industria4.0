@@ -1,0 +1,23 @@
+{
+  "name": "WebScrapingCompresorATLAS",
+  "version": "3.0.0",
+  "description": "Trae los datos de un compresor ATLAS",
+  "main": "Script.js",
+  "scripts": {
+    "start": " node Script.js",
+    "prod": "nodemon Script.js"
+  },
+  "author": "Oviedo Codigoni Carlos Nicolas",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "chalk": "^4.1.2",
+    "forever-monitor": "^3.0.3",
+    "moment": "^2.29.4",
+    "puppeteer": "^20.7.4",
+    "underscore": "^1.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
