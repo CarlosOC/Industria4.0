@@ -1,4 +1,4 @@
-# Proyecto de Compresor Atlas
+# Proyecto de Compresor ZH560+
 
 Este proyecto es un sistema completo para el monitoreo y manejo de datos de un compresor de aire Atlas. Está compuesto por tres partes principales: la API, el backend para la recolección de datos, y el frontend para la visualización de datos.
 
