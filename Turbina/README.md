@@ -24,6 +24,22 @@ Sistema **SCADA educativo–industrial** desarrollado en Python que simula y con
 
 ---
 
+## 🖥️ Capturas del SCADA
+
+> Las siguientes imágenes corresponden a la interfaz web del sistema SCADA.
+> Guardá las imágenes en una carpeta llamada `screenshots/` dentro del repositorio.
+
+### Vista general – Estados del proceso
+![Estados del proceso](screenshots/estados.png)
+
+### Comandos y configuración
+![Comandos y configuración](screenshots/comandos.png)
+
+### Gráfico de velocidad
+![Gráfico de velocidad](screenshots/grafico_velocidad.png)
+
+---
+
 ## 🧠 Arquitectura del sistema
 
 ```
@@ -44,40 +60,6 @@ dashboard/
  ├─ components.py  → componentes reutilizables
  └─ styles.css     → estilos personalizados
 ```
-
----
-
-## 🖥️ Interfaz SCADA
-
-La interfaz web incluye:
-
-### 📊 Estados del proceso
-- Temperatura (°C)
-- Presión (bar)
-- Velocidad (rpm)
-- Apertura de válvula (%)
-
-### ⚙️ Estado general
-- Etapa del proceso (Arranque, Aceleración, Régimen, etc.)
-- Modo de control (Local / Remoto)
-
-### 🔌 Sensores y actuadores
-- Quemadores
-- Frenos
-- Válvulas
-- Motor
-- PID
-- Paro de emergencia
-
-### 🎛️ Comandos
-- RUN
-- STOP
-- Paro de emergencia
-- Configuración de setpoints
-- Ajuste de parámetros PID (KP, KI, KD)
-
-### 📈 Gráficos
-- Velocidad en función del tiempo (Plotly)
 
 ---
 
