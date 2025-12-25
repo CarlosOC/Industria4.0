@@ -26,9 +26,6 @@ Sistema **SCADA educativo–industrial** desarrollado en Python que simula y con
 
 ## 🖥️ Capturas del SCADA
 
-> Las siguientes imágenes corresponden a la interfaz web del sistema SCADA.
-> Guardá las imágenes en una carpeta llamada `screenshots/` dentro del repositorio.
-
 ### Vista general – Estados del proceso
 ![Estados del proceso](screenshots/estados.png)
 
