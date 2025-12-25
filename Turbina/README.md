@@ -1,7 +1,8 @@
 # 🏭 SCADA Turbina – Industria 4.0 (Python + Dash)
 
-Sistema **SCADA educativo–industrial** desarrollado en Python que simula y controla una **turbina de gas**, integrando:
+Sistema **SCADA educativo–industrial** desarrollado en Python que simula y controla una **turbina compresora a combustión**, basado en una **especificación funcional industrial realista** (Ingelearn – Python para la Industria 4.0).
 
+El proyecto integra:
 - Modelo dinámico del proceso
 - Control PID industrial
 - Interfaz SCADA moderna (Dash)
@@ -12,27 +13,109 @@ Sistema **SCADA educativo–industrial** desarrollado en Python que simula y con
 
 ---
 
+## 📄 Base funcional del sistema
+
+Este desarrollo se basa en la **Descripción Funcional – Sistema Turbina**, la cual define:
+
+- Turbina compresora ficticia para generación de gas a presión
+- Presión de trabajo nominal: **5 bar**
+- Velocidad nominal de régimen: **4600 rpm**
+- Control local y remoto mediante HMI
+- Sistema de arranque, ignición, aceleración, régimen y parada
+- Protecciones y paradas de emergencia por condiciones de falla
+
+---
+
 ## 🚀 Características principales
 
-✔️ Simulación realista de una turbina  
-✔️ Control PID con anti-windup y derivada filtrada  
+✔️ Simulación realista de una turbina industrial  
+✔️ Secuencia de arranque en múltiples etapas  
+✔️ Control PID automático/manual (4–20 mA equivalente)  
 ✔️ SCADA web en tiempo real (Dash / Plotly)  
-✔️ Manejo de estados: arranque, aceleración, régimen, paro  
-✔️ Paro de emergencia (local / remoto)  
+✔️ Paro de emergencia local y remoto  
 ✔️ Visualización de sensores y actuadores  
-✔️ Arquitectura desacoplada (proceso ↔ SCADA)  
+✔️ Arquitectura desacoplada proceso ↔ HMI  
+
+---
+
+## 🔄 Secuencia de arranque implementada
+
+La lógica de control reproduce la secuencia definida en la especificación:
+
+1. **Arranque motor auxiliar**  
+   - Acoplamiento mediante junta neumática  
+   - Aceleración hasta velocidad de autosustentación (~478 rpm)
+
+2. **Ignición**  
+   - Activación de chisperos  
+   - Apertura inicial de válvula (10 %)  
+   - Verificación de llama en ambos quemadores
+
+3. **Aceleración**  
+   - Válvula fija al 25 %  
+   - Desacople del motor auxiliar a 2750 rpm  
+
+4. **Régimen automático**  
+   - Control PID habilitado  
+   - Consigna automática: 4600 rpm  
+
+---
+
+## 🛑 Paradas y protecciones
+
+### Parada controlada
+- Reducción de válvula al 10 %
+- Cierre total posterior
+- Aplicación de freno neumático a 2500 rpm
+
+### Parada de emergencia
+Se ejecuta inmediatamente ante:
+- Pulsador de emergencia (local o tablero)
+- Sobrevelocidad (> 5500 rpm)
+- Sobrepresión (> 5.5 bar)
+- Baja presión sostenida (< 3.3 bar)
+- Sobretemperatura (> 350 °C)
+
+Acciones:
+- Cierre inmediato de válvula
+- Descarga por chimenea de emergencia
+- Activación de frenos
+
+---
+
+## 🖥️ Interfaz SCADA
+
+### Variables de proceso
+- Temperatura (°C)
+- Presión (bar)
+- Velocidad (rpm)
+- Posición de válvula (%)
+
+### Estado general
+- Etapa del proceso
+- Modo de control (LOCAL / REMOTO)
+
+### Sensores
+- Sensores de llama
+- Sensor de freno
+- Sensor de válvula
+
+### Actuadores
+- Motor auxiliar
+- Junta neumática
+- Chisperos
+- Frenos
+- Válvula de emergencia
+- Control PID
 
 ---
 
 ## 🖥️ Capturas del SCADA
 
-### Vista general – Estados del proceso
+> Guardar las imágenes en una carpeta `screenshots/`
+
 ![Estados del proceso](screenshots/estados.png)
-
-### Comandos y configuración
 ![Comandos y configuración](screenshots/comandos.png)
-
-### Gráfico de velocidad
 ![Gráfico de velocidad](screenshots/grafico_velocidad.png)
 
 ---
@@ -43,7 +126,7 @@ Sistema **SCADA educativo–industrial** desarrollado en Python que simula y con
 main.py
  ├─ Hilo de simulación del proceso
  ├─ Comunicación mediante Queues
- └─ Lanzamiento del SCADA (Dash)
+ └─ Lanzamiento del SCADA
 
 Componentes.py
  └─ Modelo dinámico de la turbina
@@ -57,45 +140,6 @@ dashboard/
  ├─ components.py  → componentes reutilizables
  └─ styles.css     → estilos personalizados
 ```
-
----
-
-## 🔁 Comunicación SCADA ↔ Proceso
-
-La comunicación se realiza mediante **colas (`multiprocessing.Queue`)**:
-
-- `accion_queue` → comandos desde el SCADA al proceso
-- `data_queue` → estados del proceso hacia el SCADA
-
-Esto garantiza:
-- Desacople total
-- Seguridad de hilos
-- Escalabilidad futura (PLC, MQTT, OPC UA, etc.)
-
----
-
-## 🧪 Control PID
-
-El controlador PID incluye:
-
-- ✔️ Modo MAN / AUTO
-- ✔️ Anti-windup (back-calculation)
-- ✔️ Derivada filtrada
-- ✔️ Saturación de salida
-- ✔️ Implementación discreta industrial
-
-Archivo: `ControlPID.py`
-
----
-
-## 🛑 Seguridad y protecciones
-
-El sistema contempla:
-
-- Paro de emergencia local y remoto
-- Protección por sobretemperatura
-- Estados seguros de actuadores
-- Bloqueo automático ante fallas críticas
 
 ---
 
@@ -116,7 +160,7 @@ Ejecutar:
 python main.py
 ```
 
-Abrir navegador en:
+Abrir navegador:
 ```
 http://127.0.0.1:8050
 ```
@@ -125,28 +169,10 @@ http://127.0.0.1:8050
 
 ## 🎯 Objetivo del proyecto
 
-Este proyecto fue desarrollado con fines:
-
-- 🎓 Educativos (Universidad / Tecnicatura)
-- 🏭 Industriales (Industria 4.0)
-- 🧠 Didácticos (SCADA + Control + Simulación)
-
-Sirve como base para:
-- Integración con PLC
-- Migración a OPC UA / MQTT
-- Gemelo digital
-- Sistemas HMI reales
-
----
-
-## 📌 Posibles mejoras futuras
-
-- Integración con PLC real
-- Control por temperatura
-- Alarmas y eventos históricos
-- Registro de datos (historiador)
-- Autenticación de usuarios
-- Dockerización
+- 🎓 Uso académico (automatización y control)
+- 🏭 Simulación industrial realista
+- 🧠 Base para gemelos digitales
+- 🔧 Plataforma de pruebas para control PID
 
 ---
 
@@ -163,3 +189,4 @@ Argentina 🇦🇷
 
 Proyecto de uso educativo y demostrativo.  
 Libre para estudio, modificación y mejora.
+
