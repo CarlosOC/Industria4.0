@@ -1,4 +1,5 @@
 # 🏭 SCADA Turbina – Industria 4.0 (Python + Dash)
+> Proyecto orientado a **Industria 4.0**, automatización industrial y control de procesos.
 
 Sistema **SCADA educativo–industrial** desarrollado en Python que simula y controla una **turbina compresora a combustión**, basado en una **especificación funcional industrial realista** (Ingelearn – Python para la Industria 4.0).
 
@@ -9,7 +10,7 @@ El proyecto integra:
 - Comunicación bidireccional en tiempo real
 - Arquitectura modular y escalable
 
-> Proyecto orientado a **Industria 4.0**, automatización industrial y control de procesos.
+
 
 ---
 
